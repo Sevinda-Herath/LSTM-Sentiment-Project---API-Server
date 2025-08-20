@@ -2,54 +2,54 @@
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                         STOCK PREDICTION ACCURACY REPORT                     ║
 ╠═══════════════════════════════════════════════════════════════════════════════╣
-║ Generated: 2025-08-18 11:02:51                              ║
-║ Period: 2025-07-15 to 2025-08-15                    ║
+║ Generated: 2025-08-19 09:59:47                              ║
+║ Period: 2025-07-15 to 2025-08-18                    ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 
 📊 EXECUTIVE SUMMARY
 ─────────────────────
-• Total Predictions Analyzed: 638
+• Total Predictions Analyzed: 700
 • Stocks Covered: 10
 • Models Compared: 2
-• Overall Mean Accuracy: 97.96%
+• Overall Mean Accuracy: 98.02%
 • Accuracy Range: 90.07% - 100.0%
 
 🤖 MODEL PERFORMANCE COMPARISON
 ─────────────────────────────────
 
 LSTM:
-  • Mean Accuracy: 97.89%
-  • Median Accuracy: 98.27%
-  • Standard Deviation: 1.78%
-  • Total Predictions: 319
-  • Mean Error: 2.11%
+  • Mean Accuracy: 97.95%
+  • Median Accuracy: 98.3%
+  • Standard Deviation: 1.75%
+  • Total Predictions: 350
+  • Mean Error: 2.05%
 
 LSTM + SENTI:
-  • Mean Accuracy: 98.04%
+  • Mean Accuracy: 98.09%
   • Median Accuracy: 98.54%
-  • Standard Deviation: 1.71%
-  • Total Predictions: 319
-  • Mean Error: 1.96%
+  • Standard Deviation: 1.67%
+  • Total Predictions: 350
+  • Mean Error: 1.91%
 
 📈 TOP PERFORMING STOCKS
 ─────────────────────────
-1. T: 98.74% (±0.7%)
-2. JD: 98.22% (±1.42%)
-3. MSFT: 98.19% (±1.35%)
-4. META: 97.93% (±2.04%)
-5. GOOGL: 97.9% (±1.05%)
+1. T: 98.74% (±0.68%)
+2. JD: 98.34% (±1.42%)
+3. MSFT: 98.29% (±1.33%)
+4. AAPL: 98.02% (±2.24%)
+5. BABA: 97.99% (±1.87%)
 
 🔍 KEY INSIGHTS
 ─────────────────
-1. Overall prediction accuracy averaged 97.96% across all stocks and models
-2. The LSTM + SENTI model performed 0.15% better than the alternative
+1. Overall prediction accuracy averaged 98.02% across all stocks and models
+2. The LSTM + SENTI model performed 0.14% better than the alternative
 3. Most predictable stock: T with 98.74% average accuracy
-4. Least predictable stock: AMZN with 97.46% average accuracy
-5. Standard deviation of accuracy was 1.75%, indicating moderate variability
-6. Analysis covered 638 predictions across 10 different stocks
+4. Least predictable stock: AMZN with 97.50% average accuracy
+5. Standard deviation of accuracy was 1.71%, indicating moderate variability
+6. Analysis covered 700 predictions across 10 different stocks
 
 
 ═══════════════════════════════════════════════════════════════════════════════
-Report saved as: Stock_Prediction_Accuracy_Report_20250818_110251.txt
-JSON data saved as: accuracy_analysis_summary_20250818_110251.json
+Report saved as: Stock_Prediction_Accuracy_Report_20250819_095947.txt
+JSON data saved as: accuracy_analysis_summary_20250819_095947.json
 ═══════════════════════════════════════════════════════════════════════════════
