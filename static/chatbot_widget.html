@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Chatbot</title>
+  <style>
+    /* Floating Action Button */
+    #chat-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #0ea5e9;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
+
+    #chat-popup {
+      position: fixed;
+      right: 20px;
+      bottom: 90px;
+      width: 360px;
+      max-width: calc(100% - 40px);
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+      overflow: hidden;
+      display: none;
+      z-index: 10000;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0ea5e9;
+      color: #fff;
+      padding: 10px 12px;
+      font-weight: 600;
+    }
+    .chat-close { cursor: pointer; font-size: 18px; }
+
+    .chat-body {
+      padding: 12px;
+      max-height: 65vh;
+      overflow-y: auto;
+    }
+
+    .field { margin-bottom: 10px; }
+    .field label { display: block; font-size: 12px; color: #374151; margin-bottom: 4px; }
+    .field input[type="text"], .field input[type="date"], .field select, .field textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    .field textarea { min-height: 80px; resize: vertical; }
+    .row { display: flex; gap: 8px; }
+    .row .col { flex: 1; }
+
+    .actions { display: flex; gap: 8px; margin-top: 8px; }
+    .btn {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .btn-primary { background: #0ea5e9; color: #fff; }
+    .btn-secondary { background: #f3f4f6; color: #111827; border-color: #e5e7eb; }
+
+    .output { margin-top: 10px; border-top: 1px solid #e5e7eb; padding-top: 10px; }
+    .status { font-size: 12px; color: #6b7280; margin-bottom: 6px; }
+    .answer { white-space: pre-wrap; font-size: 14px; color: #111827; }
+    .meta { margin-top: 6px; font-size: 12px; color: #374151; }
+
+    .hint { font-size: 12px; color: #6b7280; }
+
+    /* Suggestions */
+    .suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; }
+    .chip {
+      padding: 6px 8px;
+      border-radius: 16px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      font-size: 12px;
+      color: #111827;
+      user-select: none;
+    }
+    .chip:hover { background: #e5e7eb; }
+  </style>
+</head>
+<body>
+  <div id="chat-fab" title="Chat">
+    💬
+  </div>
+
+  <div id="chat-popup" role="dialog" aria-label="Stock Chatbot">
+    <div class="chat-header">
+      <span>Stock Chatbot</span>
+      <span class="chat-close" id="chat-close" title="Close">✕</span>
+    </div>
+    <div class="chat-body">
+  <!-- Using a fixed API endpoint: https://mylstmsenti-api.ddns.net/chat/ -->
+
+      <div class="field">
+        <label for="prompt">Prompt</label>
+        <textarea id="prompt" placeholder="Ask about symbols, performance, predictions..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Suggestions</label>
+        <div class="suggestions">
+          <div class="chip" data-prompt="Compare recent performance and predictions for AAPL vs MSFT." data-symbols="AAPL,MSFT">AAPL vs MSFT compare</div>
+          <div class="chip" data-prompt="Summarize latest predictions across available symbols.">Summarize predictions</div>
+          <div class="chip" data-prompt="Show price change and sentiment for GOOGL in the last 30 days." data-symbols="GOOGL">GOOGL 30d sentiment</div>
+          <div class="chip" data-prompt="Which model (LSTM vs LSTM+Sentiment) performed better for META recently?" data-symbols="META">META model winner</div>
+          <div class="chip" data-prompt="Explain yesterday vs today for AAPL." data-symbols="AAPL">AAPL day-over-day</div>
+          <div class="chip" data-prompt="List symbols with the biggest % change over the recent window.">Biggest movers</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field col">
+          <label for="symbols">Symbols (comma-separated)</label>
+          <input id="symbols" type="text" placeholder="e.g., AAPL,MSFT" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field col">
+          <label for="dateStart">Start date</label>
+          <input id="dateStart" type="date" />
+        </div>
+        <div class="field col">
+          <label for="dateEnd">End date</label>
+          <input id="dateEnd" type="date" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field col">
+          <label for="model">Model</label>
+          <select id="model">
+            <option value="gemma2:2b" selected>gemma2:2b</option>
+          </select>
+        </div>
+        <div class="field col">
+          <label>
+            <input id="useLive" type="checkbox" checked />
+            Use live prices
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="sendBtn">Send</button>
+        <button class="btn btn-secondary" id="clearBtn">Clear</button>
+      </div>
+
+      <div class="output">
+        <div class="status" id="status"></div>
+        <div class="answer" id="answer"></div>
+        <div class="meta" id="meta"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const fab = document.getElementById('chat-fab');
+      const popup = document.getElementById('chat-popup');
+      const closeBtn = document.getElementById('chat-close');
+      const sendBtn = document.getElementById('sendBtn');
+      const clearBtn = document.getElementById('clearBtn');
+
+      const promptEl = document.getElementById('prompt');
+      const symbolsEl = document.getElementById('symbols');
+      const dateStartEl = document.getElementById('dateStart');
+      const dateEndEl = document.getElementById('dateEnd');
+      const modelEl = document.getElementById('model');
+      const useLiveEl = document.getElementById('useLive');
+
+      const statusEl = document.getElementById('status');
+      const answerEl = document.getElementById('answer');
+      const metaEl = document.getElementById('meta');
+
+  // Use same-origin HTTPS-safe endpoint to avoid mixed content issues
+  const API_CHAT_URL = '/chat';
+
+      function togglePopup(show){
+        popup.style.display = show ? 'block' : 'none';
+      }
+
+      fab.addEventListener('click', () => togglePopup(true));
+      closeBtn.addEventListener('click', () => togglePopup(false));
+
+      clearBtn.addEventListener('click', () => {
+        promptEl.value = '';
+        answerEl.textContent = '';
+        metaEl.textContent = '';
+        statusEl.textContent = '';
+      });
+
+      // Suggestions click handler
+      document.querySelectorAll('.chip').forEach(ch => {
+        ch.addEventListener('click', () => {
+          const p = ch.getAttribute('data-prompt') || '';
+          const s = ch.getAttribute('data-symbols') || '';
+          promptEl.value = p;
+          if (s) symbolsEl.value = s;
+          popup.scrollTop = popup.scrollHeight;
+        });
+      });
+
+      async function send(){
+        const prompt = promptEl.value.trim();
+        if (!prompt) {
+          statusEl.textContent = 'Enter a prompt.';
+          return;
+        }
+        statusEl.textContent = 'Sending...';
+        answerEl.textContent = '';
+        metaEl.textContent = '';
+
+        const symbols = symbolsEl.value
+          .split(',')
+          .map(s => s.trim())
+          .filter(Boolean);
+
+        const body = {
+          prompt,
+          symbols,
+          date_start: dateStartEl.value || null,
+          date_end: dateEndEl.value || null,
+          use_live_prices: !!useLiveEl.checked,
+          model: modelEl.value || 'gemma2:2b',
+        };
+
+        try {
+          const res = await fetch(API_CHAT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+          const text = await res.text();
+          let data;
+          try { data = JSON.parse(text); } catch (e) { data = null; }
+
+          if (!res.ok) {
+            statusEl.textContent = 'Error: ' + (data && data.error ? data.error : res.status + ' ' + text);
+            return;
+          }
+
+          statusEl.textContent = 'OK';
+          answerEl.textContent = data.answer || '';
+          if (data.context_meta) {
+            const m = data.context_meta;
+            metaEl.textContent = 'Meta — period: ' + (m.period || 'N/A') + ', now: ' + (m.now_utc || 'N/A') + ', data date: ' + (m.effective_date || 'N/A');
+          }
+        } catch (err) {
+          statusEl.textContent = 'Network error: ' + err;
+        }
+      }
+
+      sendBtn.addEventListener('click', send);
+
+      // Optional: open popup if hash == #chat
+      if (window.location.hash === '#chat') togglePopup(true);
+    })();
+  </script>
+</body>
+</html>

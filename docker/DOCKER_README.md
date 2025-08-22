@@ -103,6 +103,18 @@ You can also use the convenience script from the project root:
 - `GET /predict/lstm?symbol={symbol}&days={days}` - Get LSTM price prediction (days parameter optional, default: 60)
 - `GET /predict/lstm_sentiment?symbol={symbol}&days={days}` - Get LSTM sentiment-based price prediction (days parameter optional, default: 60)
 
+### Chatbot (Ollama + Gemma 2B)
+- `POST /chat` - Chat with a local LLM grounded on your CSVs and optional live prices
+  - Requires a running Ollama server on the host (default http://localhost:11434) with `gemma2:2b` pulled.
+  - If Ollama is on a different host/port, set `OLLAMA_BASE_URL` env var for the API container.
+
+Tip: When running Docker on Linux, the container can access the host via `host.docker.internal` (may require Docker 20.10+). To point the API to the host Ollama, set:
+
+```yaml
+environment:
+  - OLLAMA_BASE_URL=http://host.docker.internal:11434
+```
+
 ### Example Usage
 ```bash
 # Health check
@@ -122,6 +134,14 @@ curl http://localhost:8000/metrics/lstm/MSFT
 
 # Get sentiment chart for Google
 curl http://localhost:8000/sentiment_chart/GOOGL
+
+# Chatbot example (outside container)
+curl -X POST http://localhost:8000/chat \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "prompt": "Summarize latest predictions for AAPL and MSFT.",
+    "symbols": ["AAPL", "MSFT"]
+  }'
 ```
 
 ### Supported Stock Symbols

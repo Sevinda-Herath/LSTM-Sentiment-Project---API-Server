@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Body
 from fastapi.responses import JSONResponse, FileResponse
 import pandas as pd
 import os
@@ -9,6 +9,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime, timedelta, time
 
 import app.scheduler  # ensures the daily scheduler runs
+from pydantic import BaseModel, Field
+from typing import List, Optional
+
+from app.chatbot import build_context, call_ollama_chat
 
 app = FastAPI()
 
@@ -26,7 +30,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allow all origins (or specify your domain)
     allow_credentials=True,
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -144,3 +148,86 @@ def predict_price_sentiment(symbol: str = Query(...), days: int = Query(60)):
         }
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=400)
+
+
+# Chatbot Section
+
+class ChatRequest(BaseModel):
+    prompt: str = Field(..., description="User question or instruction")
+    symbols: List[str] = Field(default_factory=list, description="Stock symbols to include in context")
+    date_start: Optional[str] = Field(None, description="YYYY-MM-DD inclusive start date for data slice")
+    date_end: Optional[str] = Field(None, description="YYYY-MM-DD inclusive end date for data slice")
+    use_live_prices: bool = Field(True, description="Whether to include live prices when available")
+    model: str = Field("gemma2:2b", description="Ollama model name, e.g., gemma2:2b")
+
+
+class ChatResponse(BaseModel):
+    answer: str
+    context_meta: dict
+
+
+@app.post("/chat", response_model=ChatResponse)
+def chat_with_csv(req: ChatRequest = Body(...)):
+    try:
+        # Auto-detect symbols from datasets if not provided
+        symbols = [s.upper() for s in (req.symbols or [])]
+        if not symbols:
+            try:
+                files = os.listdir("datasets")
+                symbols = [
+                    f.replace("_daily_data.csv", "")
+                    for f in files if f.endswith("_daily_data.csv")
+                ]
+            except Exception:
+                symbols = []
+
+        # Build context from local CSVs and optional live prices
+        context_text, meta = build_context(
+            symbols=symbols,
+            date_start=req.date_start,
+            date_end=req.date_end,
+            use_live_prices=req.use_live_prices,
+        )
+
+        # Compute current dates
+        now_utc_str = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
+        effective_today = get_today()
+
+        # Build a user-facing period label
+        if req.date_start and req.date_end:
+            period_label = f"{req.date_start} to {req.date_end}"
+        elif req.date_start and not req.date_end:
+            period_label = f"{req.date_start} to {effective_today}"
+        elif not req.date_start and req.date_end:
+            period_label = f"up to {req.date_end}"
+        else:
+            period_label = "recent window (~last 120 trading days)"
+
+        system_prompt = (
+            f"You are a concise financial data assistant. Today's date/time is {now_utc_str}. "
+            f"Use the effective data date {effective_today} for daily CSV outputs when relevant. "
+            "Use only the provided context, the user's prompt, and general market reasoning. "
+            "If data is missing, say so. Prefer concrete numbers and short explanations. "
+            f"Important: Start your answer with this exact first line: Period: {period_label}"
+        )
+
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"Context:\n{context_text}\n\nUser question: {req.prompt}"},
+        ]
+
+        answer = call_ollama_chat(messages, model=req.model, stream=False)
+
+        # Enrich meta with date info
+        meta = dict(meta or {})
+        meta.update({
+            "now_utc": now_utc_str,
+            "effective_date": effective_today,
+            "period": period_label,
+        })
+
+        return ChatResponse(answer=answer.strip(), context_meta=meta)
+    except ConnectionError as ce:
+        return JSONResponse(status_code=503, content={"error": str(ce)})
+    except Exception as e:
+        return JSONResponse(status_code=400, content={"error": str(e)})
