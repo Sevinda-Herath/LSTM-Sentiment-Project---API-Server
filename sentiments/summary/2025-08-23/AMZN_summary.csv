@@ -1,0 +1,2 @@
+date_collected,symbol,total_articles,positive_count,neutral_count,negative_count,avg_confidence_positive,avg_confidence_neutral,avg_confidence_negative
+2025-08-23,AMZN,84,6,72,6,0.8645,0.9075,0.9511

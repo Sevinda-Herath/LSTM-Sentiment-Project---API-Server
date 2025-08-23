@@ -205,7 +205,8 @@ def chat_with_csv(req: ChatRequest = Body(...)):
 
         system_prompt = (
             f"You are a concise financial data assistant. Today's date/time is {now_utc_str}. "
-            f"Use the effective data date {effective_today} for daily CSV outputs when relevant. "
+            f"Use the effective data date {effective_today} for daily CSV outputs when relevant."
+            "Always state the date or the time period selected by the user before starting the conversation"
             "Use only the provided context, the user's prompt, and general market reasoning. "
             "If data is missing, say so. Prefer concrete numbers and short explanations. "
             f"Important: Start your answer with this exact first line: Period: {period_label}"
