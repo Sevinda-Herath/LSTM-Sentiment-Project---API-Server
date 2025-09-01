@@ -1,0 +1,124 @@
+[02:30:01] 🟢 Dataset download started
+[02:30:01] ⬇️ Downloading data for AMZN...
+[02:30:02] ✅ Saved AMZN to datasets/AMZN_daily_data.csv
+[02:30:02] ⬇️ Downloading data for AAPL...
+[02:30:02] ✅ Saved AAPL to datasets/AAPL_daily_data.csv
+[02:30:02] ⬇️ Downloading data for GOOGL...
+[02:30:03] ✅ Saved GOOGL to datasets/GOOGL_daily_data.csv
+[02:30:03] ⬇️ Downloading data for 005930.KS...
+[02:30:03] ✅ Saved 005930.KS to datasets/005930.KS_daily_data.csv
+[02:30:03] ⬇️ Downloading data for 2317.TW...
+[02:30:06] ✅ Saved 2317.TW to datasets/2317.TW_daily_data.csv
+[02:30:06] ⬇️ Downloading data for MSFT...
+[02:30:07] ✅ Saved MSFT to datasets/MSFT_daily_data.csv
+[02:30:07] ⬇️ Downloading data for JD...
+[02:30:07] ✅ Saved JD to datasets/JD_daily_data.csv
+[02:30:07] ⬇️ Downloading data for BABA...
+[02:30:07] ✅ Saved BABA to datasets/BABA_daily_data.csv
+[02:30:07] ⬇️ Downloading data for T...
+[02:30:08] ✅ Saved T to datasets/T_daily_data.csv
+[02:30:08] ⬇️ Downloading data for META...
+[02:30:08] ✅ Saved META to datasets/META_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/AMZN_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/AAPL_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/GOOGL_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/005930.KS_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/2317.TW_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/MSFT_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/JD_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/BABA_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/T_daily_data.csv
+[02:30:08] 🧹 Cleaned first row in: datasets/META_daily_data.csv
+[02:30:08] ✅ Dataset download completed
+
+[02:30:25] 🟢 Sentiment analysis job started
+[02:30:25] 🔄 Loading FinBERT model...
+[02:30:26] ✅ FinBERT model loaded
+[02:30:26] 
+🔍 Fetching news for AMZN...
+[02:30:51] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/AMZN_sentiment.csv
+[02:30:51] 📊 Saved chart: sentiments/charts/2025-08-27/AMZN_chart.png
+[02:30:51] 
+🔍 Fetching news for AAPL...
+[02:31:13] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/AAPL_sentiment.csv
+[02:31:13] 📊 Saved chart: sentiments/charts/2025-08-27/AAPL_chart.png
+[02:31:13] 
+🔍 Fetching news for GOOGL...
+[02:31:33] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/GOOGL_sentiment.csv
+[02:31:33] 📊 Saved chart: sentiments/charts/2025-08-27/GOOGL_chart.png
+[02:31:33] 
+🔍 Fetching news for 005930.KS...
+[02:31:51] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/005930.KS_sentiment.csv
+[02:31:51] 📊 Saved chart: sentiments/charts/2025-08-27/005930.KS_chart.png
+[02:31:51] 
+🔍 Fetching news for 2317.TW...
+[02:32:03] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/2317.TW_sentiment.csv
+[02:32:03] 📊 Saved chart: sentiments/charts/2025-08-27/2317.TW_chart.png
+[02:32:03] 
+🔍 Fetching news for MSFT...
+[02:32:21] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/MSFT_sentiment.csv
+[02:32:21] 📊 Saved chart: sentiments/charts/2025-08-27/MSFT_chart.png
+[02:32:21] 
+🔍 Fetching news for JD...
+[02:32:37] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/JD_sentiment.csv
+[02:32:37] 📊 Saved chart: sentiments/charts/2025-08-27/JD_chart.png
+[02:32:37] 
+🔍 Fetching news for BABA...
+[02:32:52] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/BABA_sentiment.csv
+[02:32:52] 📊 Saved chart: sentiments/charts/2025-08-27/BABA_chart.png
+[02:32:52] 
+🔍 Fetching news for T...
+[02:33:09] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/T_sentiment.csv
+[02:33:10] 📊 Saved chart: sentiments/charts/2025-08-27/T_chart.png
+[02:33:10] 
+🔍 Fetching news for META...
+[02:33:28] ✅ Saved sentiment CSV: sentiments/sentiment/2025-08-27/META_sentiment.csv
+[02:33:29] 📊 Saved chart: sentiments/charts/2025-08-27/META_chart.png
+[02:33:29] 📁 Saved summary for AMZN: sentiments/summary/2025-08-27/AMZN_summary.csv
+[02:33:29] 📁 Saved summary for AAPL: sentiments/summary/2025-08-27/AAPL_summary.csv
+[02:33:29] 📁 Saved summary for GOOGL: sentiments/summary/2025-08-27/GOOGL_summary.csv
+[02:33:29] 📁 Saved summary for 005930.KS: sentiments/summary/2025-08-27/005930.KS_summary.csv
+[02:33:29] 📁 Saved summary for 2317.TW: sentiments/summary/2025-08-27/2317.TW_summary.csv
+[02:33:29] 📁 Saved summary for MSFT: sentiments/summary/2025-08-27/MSFT_summary.csv
+[02:33:29] 📁 Saved summary for JD: sentiments/summary/2025-08-27/JD_summary.csv
+[02:33:29] 📁 Saved summary for BABA: sentiments/summary/2025-08-27/BABA_summary.csv
+[02:33:29] 📁 Saved summary for T: sentiments/summary/2025-08-27/T_summary.csv
+[02:33:29] 📁 Saved summary for META: sentiments/summary/2025-08-27/META_summary.csv
+[02:33:29] 
+📊 Combined summary saved to: sentiments/summary/2025-08-27/all_symbols_summary.csv
+[02:33:29] 
+✅ Sentiment analysis completed for all stocks on 2025-08-27
+[02:33:33] 🟢 Prediction job started for 2025-08-27
+[02:33:33] 🔍 Predicting AMZN...
+[02:33:40] ✅ AMZN LSTM Prediction: $225.77
+[02:33:42] ✅ AMZN LSTM+Sentiment Prediction: $226.44
+[02:33:42] 🔍 Predicting AAPL...
+[02:33:42] ✅ AAPL LSTM Prediction: $226.78
+[02:33:43] ✅ AAPL LSTM+Sentiment Prediction: $226.73
+[02:33:43] 🔍 Predicting GOOGL...
+[02:33:44] ✅ GOOGL LSTM Prediction: $207.07
+[02:33:44] ✅ GOOGL LSTM+Sentiment Prediction: $205.36
+[02:33:44] 🔍 Predicting 005930.KS...
+[02:33:45] ✅ 005930.KS LSTM Prediction: $70630.33
+[02:33:46] ✅ 005930.KS LSTM+Sentiment Prediction: $71257.07
+[02:33:46] 🔍 Predicting 2317.TW...
+[02:33:47] ✅ 2317.TW LSTM Prediction: $207.28
+[02:33:48] ✅ 2317.TW LSTM+Sentiment Prediction: $210.49
+[02:33:48] 🔍 Predicting MSFT...
+[02:33:48] ✅ MSFT LSTM Prediction: $510.64
+[02:33:49] ✅ MSFT LSTM+Sentiment Prediction: $504.72
+[02:33:49] 🔍 Predicting JD...
+[02:33:50] ✅ JD LSTM Prediction: $31.75
+[02:33:51] ✅ JD LSTM+Sentiment Prediction: $31.84
+[02:33:51] 🔍 Predicting BABA...
+[02:33:52] ✅ BABA LSTM Prediction: $124.41
+[02:33:52] ✅ BABA LSTM+Sentiment Prediction: $124.22
+[02:33:52] 🔍 Predicting T...
+[02:33:53] ✅ T LSTM Prediction: $28.39
+[02:33:54] ✅ T LSTM+Sentiment Prediction: $28.63
+[02:33:54] 🔍 Predicting META...
+[02:33:55] ✅ META LSTM Prediction: $747.70
+[02:33:55] ✅ META LSTM+Sentiment Prediction: $749.53
+[02:33:55] ✅ Combined results saved to: results/2025-08-27/lstm.csv and lstm_senti.csv
+[02:33:55] 🛑 Prediction job completed.
+
