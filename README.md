@@ -62,8 +62,6 @@ pip3 install -r requirements.txt
 # Run the application
 bash run.sh
 
-# (Optional) Install Ollama and Gemma 2B locally for the /chat endpoint
-bash scripts/install_ollama.sh
 ```
 
 ### Option 3: Auto-run with tmux
@@ -278,15 +276,6 @@ Open your browser and visit:
 - `GET /predict/lstm?symbol={symbol}&days={days}` - LSTM price prediction
 - `GET /predict/lstm_sentiment?symbol={symbol}&days={days}` - LSTM sentiment-based prediction
 
-### Chatbot (Ollama + Gemma 2B)
-- `POST /chat` - Chat with a local LLM grounded on your CSVs and optional live prices
-    - Body JSON:
-        - `prompt` (string, required)
-        - `symbols` (string[], optional) - filter to selected tickers
-        - `date_start`, `date_end` (YYYY-MM-DD, optional)
-        - `use_live_prices` (bool, default true)
-        - `model` (string, default `gemma2:2b`)
-
 ## 🔧 API Usage Examples
 
 ```bash
@@ -308,27 +297,6 @@ curl http://localhost:8000/metrics/lstm/GOOGL
 # Download sentiment chart for Amazon
 curl http://localhost:8000/sentiment_chart/AMZN --output amzn_sentiment.png
 
-# Chatbot: ask about Apple and Microsoft using recent CSVs
-curl -X POST http://localhost:8000/chat \
-    -H 'Content-Type: application/json' \
-    -d '{
-        "prompt": "Compare recent performance and predictions for AAPL vs MSFT.",
-        "symbols": ["AAPL", "MSFT"],
-        "use_live_prices": true
-    }'
-
-### Ollama setup (outside the container)
-1. Install Ollama: https://ollama.com
-2. Start the model once to pull it:
-     ```bash
-     ollama run gemma2:2b
-     ```
-3. Ensure the Ollama server is running locally (default http://localhost:11434). If using a remote host or different port, set `OLLAMA_BASE_URL` in the API environment.
-
-Alternatively, run the helper script on Linux:
-```bash
-bash scripts/install_ollama.sh
-```
 ```
 
 ## 🏗️ Project Structure
