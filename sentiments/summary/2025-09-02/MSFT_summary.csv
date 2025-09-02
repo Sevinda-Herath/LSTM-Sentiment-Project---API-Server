@@ -1,0 +1,2 @@
+date_collected,symbol,total_articles,positive_count,neutral_count,negative_count,avg_confidence_positive,avg_confidence_neutral,avg_confidence_negative
+2025-09-02,MSFT,77,11,42,24,0.8236,0.7847,0.815
