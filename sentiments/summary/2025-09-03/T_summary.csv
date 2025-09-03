@@ -1,0 +1,2 @@
+date_collected,symbol,total_articles,positive_count,neutral_count,negative_count,avg_confidence_positive,avg_confidence_neutral,avg_confidence_negative
+2025-09-03,T,84,24,54,6,0.7266,0.8669,0.7878
