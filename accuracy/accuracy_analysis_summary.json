@@ -1,103 +1,103 @@
 {
   "report_metadata": {
-    "generated_at": "2025-09-04 03:05:29",
-    "analysis_period": "2025-07-15 to 2025-09-03",
-    "total_predictions": 1020,
+    "generated_at": "2025-09-22 12:18:55",
+    "analysis_period": "2025-07-15 to 2025-09-19",
+    "total_predictions": 1338,
     "stocks_analyzed": 10,
     "models_compared": 2
   },
   "overall_performance": {
-    "mean_accuracy_percent": 98.05,
-    "median_accuracy_percent": 98.45,
-    "std_accuracy_percent": 1.73,
-    "mean_percentage_error": 1.95,
+    "mean_accuracy_percent": 97.94,
+    "median_accuracy_percent": 98.36,
+    "std_accuracy_percent": 1.78,
+    "mean_percentage_error": 2.06,
     "best_accuracy_percent": 100.0,
     "worst_accuracy_percent": 86.85
   },
   "model_comparison": {
     "lstm": {
-      "mean_accuracy": 98.01,
-      "median_accuracy": 98.36,
-      "std_accuracy": 1.74,
-      "total_predictions": 510,
-      "mean_percentage_error": 1.99
+      "mean_accuracy": 97.91,
+      "median_accuracy": 98.27,
+      "std_accuracy": 1.77,
+      "total_predictions": 669,
+      "mean_percentage_error": 2.09
     },
     "lstm_senti": {
-      "mean_accuracy": 98.08,
-      "median_accuracy": 98.52,
-      "std_accuracy": 1.72,
-      "total_predictions": 510,
-      "mean_percentage_error": 1.92
+      "mean_accuracy": 97.97,
+      "median_accuracy": 98.45,
+      "std_accuracy": 1.78,
+      "total_predictions": 669,
+      "mean_percentage_error": 2.03
     }
   },
   "stock_performance": {
     "005930.KS": {
-      "mean_accuracy": 97.9,
-      "median_accuracy": 98.4,
-      "std_accuracy": 1.73,
-      "total_predictions": 102
+      "mean_accuracy": 97.73,
+      "median_accuracy": 98.18,
+      "std_accuracy": 1.8,
+      "total_predictions": 132
     },
     "2317.TW": {
-      "mean_accuracy": 97.77,
-      "median_accuracy": 98.04,
-      "std_accuracy": 1.63,
-      "total_predictions": 102
+      "mean_accuracy": 97.9,
+      "median_accuracy": 98.16,
+      "std_accuracy": 1.56,
+      "total_predictions": 134
     },
     "AAPL": {
-      "mean_accuracy": 98.26,
-      "median_accuracy": 98.88,
-      "std_accuracy": 1.96,
-      "total_predictions": 102
+      "mean_accuracy": 98.08,
+      "median_accuracy": 98.55,
+      "std_accuracy": 1.85,
+      "total_predictions": 134
     },
     "AMZN": {
-      "mean_accuracy": 97.77,
+      "mean_accuracy": 97.82,
       "median_accuracy": 98.11,
-      "std_accuracy": 1.71,
-      "total_predictions": 102
+      "std_accuracy": 1.58,
+      "total_predictions": 134
     },
     "BABA": {
-      "mean_accuracy": 97.22,
-      "median_accuracy": 98.26,
+      "mean_accuracy": 96.83,
+      "median_accuracy": 97.77,
       "std_accuracy": 2.62,
-      "total_predictions": 102
+      "total_predictions": 134
     },
     "GOOGL": {
-      "mean_accuracy": 97.85,
-      "median_accuracy": 98.06,
-      "std_accuracy": 1.51,
-      "total_predictions": 102
+      "mean_accuracy": 97.49,
+      "median_accuracy": 97.94,
+      "std_accuracy": 1.87,
+      "total_predictions": 134
     },
     "JD": {
-      "mean_accuracy": 98.27,
-      "median_accuracy": 98.62,
-      "std_accuracy": 1.36,
-      "total_predictions": 102
+      "mean_accuracy": 98.02,
+      "median_accuracy": 98.36,
+      "std_accuracy": 1.66,
+      "total_predictions": 134
     },
     "META": {
-      "mean_accuracy": 98.12,
+      "mean_accuracy": 98.18,
       "median_accuracy": 98.59,
-      "std_accuracy": 1.75,
-      "total_predictions": 102
+      "std_accuracy": 1.59,
+      "total_predictions": 134
     },
     "MSFT": {
-      "mean_accuracy": 98.51,
-      "median_accuracy": 98.86,
-      "std_accuracy": 1.2,
-      "total_predictions": 102
+      "mean_accuracy": 98.49,
+      "median_accuracy": 98.73,
+      "std_accuracy": 1.13,
+      "total_predictions": 134
     },
     "T": {
-      "mean_accuracy": 98.8,
-      "median_accuracy": 98.89,
+      "mean_accuracy": 98.84,
+      "median_accuracy": 98.9,
       "std_accuracy": 0.69,
-      "total_predictions": 102
+      "total_predictions": 134
     }
   },
   "key_insights": [
-    "Overall prediction accuracy averaged 98.05% across all stocks and models",
-    "The LSTM + SENTI model performed 0.07% better than the alternative",
-    "Most predictable stock: T with 98.80% average accuracy",
-    "Least predictable stock: BABA with 97.22% average accuracy",
-    "Standard deviation of accuracy was 1.73%, indicating moderate variability",
-    "Analysis covered 1020 predictions across 10 different stocks"
+    "Overall prediction accuracy averaged 97.94% across all stocks and models",
+    "The LSTM + SENTI model performed 0.06% better than the alternative",
+    "Most predictable stock: T with 98.84% average accuracy",
+    "Least predictable stock: BABA with 96.83% average accuracy",
+    "Standard deviation of accuracy was 1.78%, indicating moderate variability",
+    "Analysis covered 1338 predictions across 10 different stocks"
   ]
 }
